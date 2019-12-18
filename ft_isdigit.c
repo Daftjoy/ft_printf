@@ -6,11 +6,13 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:00:08 by antmarti          #+#    #+#             */
-/*   Updated: 2019/11/17 17:23:40 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/18 21:00:33 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//#include "libft.h"
+
+#include "printf.h"
 
 int	ft_isdigit(int c)
 {

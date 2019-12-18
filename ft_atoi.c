@@ -6,13 +6,13 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:00:35 by antmarti          #+#    #+#             */
-/*   Updated: 2019/11/27 13:34:55 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/18 20:59:54 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//#include "libft.h"
 
-#include "libft.h"
+#include "printf.h"
 
 int		ft_atoi(const char *str)
 {

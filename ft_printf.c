@@ -6,28 +6,46 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:02:36 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/14 19:15:31 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/18 21:30:46 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int		ft_printf(const char *format, ...)
 {
-	va_list list;
-	char	*str;
-	
-	va_start(list, format);
-	write(1, format, ft_strlen(format));
-	while (format)
+	t_print		*print;
+	void		*arg;
+
+	if (!(print = malloc(sizeof(t_print))))
+		return (-1);
+	if (format)
 	{
-		str = va_arg(list, char *);
-		write(1, str, ft_strlen(str));	
+		va_start(print->list, format);
+		ft_init(print, format);
+		while (print->format[print->pos])
+		{
+			if (print->format[print->pos] == '%' && print->pos++)
+			{
+				ft_flags(print);
+				printf("%d\n", (int)print->flags->);
+				arg = va_arg(print->list, void *);
+				if (print->flags->ast == 1)
+				{
+					ft_ast(print, arg);
+					arg = va_arg(print->list, void *);
+				}
+				//ft_converse(print, arg);
+			}
+			write(1, &((const void *)print->format)[print->pos], 1);
+			print->len++;
+			print->pos++;
+		}
 	}
-	return (0);
+	return (print->len);
 }
 
 int		main(void)
 {
-	ft_printf("Hola qué tal estamos", "what", NULL);
+	ft_printf("axjaa   %012412421.*d",43,  23);
 }
