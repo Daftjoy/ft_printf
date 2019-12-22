@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 11:11:00 by agianico          #+#    #+#             */
-/*   Updated: 2019/12/22 00:59:18 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 02:05:58 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,9 @@ void		ft_type_d(t_print *print, void *arg)
 
 	i = -1;
 	d = ft_itoa((int)arg);
+	if (print->type == 'u')
+		d = ft_itoa((unsigned int)arg);
 	print->pos++;
-	if (d[0] == '-' && (print->flags->zero == 1 || print->flags->dot == 1))
-	{
-		ft_rep(print, 1, '-');
-		i++;
-	}
 	if (print->flags->width != 0 && print->flags->precision == 0)
 		return (ft_width(print, d, i, (print->flags->width - ft_strlen(d))));
 	else if (print->flags->width == 0 && print->flags->precision != 0)

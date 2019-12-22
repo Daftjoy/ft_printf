@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:02:36 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 01:00:34 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 02:15:10 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int		ft_printf(const char *format, ...)
 
 int		main(void)
 {
-	ft_printf("%16.*d\n", 32, 16);
-	printf("%16.*d\n", 32, 16);
+	int a;
+
+	a = 3;
+	printf("%d\n", ft_printf("%s\n", &a));
+	printf("%d\n", printf("%24p\n", &a));
 }

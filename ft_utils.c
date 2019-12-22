@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:24:55 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/21 22:15:27 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 02:10:16 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,24 +91,31 @@ void		ft_converse(t_print *print, void *arg)
 	if (print->format[print->pos] == 's')
 		ft_type_s(print, arg);
 	//if(print->format[print->pos] == 'p')
-	if(print->format[print->pos] == 'd' || (print->format[print->pos] == 'i'))
+	if (print->format[print->pos] == 'd' || (print->format[print->pos] == 'i'))
 		ft_type_d(print, arg);
-	//if(print->format[print->pos] == 'u')
+	if (print->format[print->pos] == 'u')
+	{
+		print->type = 'u';
+		ft_type_d(print, arg);
+	}
 	//if(print->format[print->pos] == 'x' || (print->format[print->pos] == 'X'))
-	//if(print->format[print->pos] == 'f')
-	
-
 }
 
 void		ft_type_s(t_print *print, void *arg)
 {
 	int		i;
 	char	*str;
+	int		dif;
 
 	i = -1;
 	str = (char *)arg;
+	dif = print->flags->width - ft_strlen(str);
+	if (print->flags->minus == 0)
+		ft_rep(print, dif, ' ');
 	while (str[++i])
 		write(1, &str[i], 1);
+	if (print->flags->minus == 1)
+		ft_rep(print, dif, ' ');
 	print->len += ft_strlen(str);
 	print->pos++;
 }
