@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:24:55 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 02:38:38 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 15:33:11 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void		ft_converse(t_print *print, void *arg)
 		ft_type_c(print, arg);
 	if (print->format[print->pos] == 's')
 		ft_type_s(print, arg);
-	//if(print->format[print->pos] == 'p')
 	if (print->format[print->pos] == 'd' || (print->format[print->pos] == 'i'))
 		ft_type_d(print, arg);
 	if (print->format[print->pos] == 'u')
@@ -98,7 +97,17 @@ void		ft_converse(t_print *print, void *arg)
 		print->type = 'u';
 		ft_type_d(print, arg);
 	}
-	//if(print->format[print->pos] == 'x' || (print->format[print->pos] == 'X'))
+	if (print->format[print->pos] == 'x' ||
+	(print->format[print->pos] == 'X') ||
+	(print->format[print->pos] == 'p'))
+	{
+		if (print->format[print->pos] == 'x' ||
+		(print->format[print->pos] == 'p'))//no funciona todavía
+			print->type = 'x';
+		else
+			print->type = 'X';
+		ft_type_x(print, arg);
+	}
 }
 
 void		ft_type_s(t_print *print, void *arg)
@@ -131,20 +140,44 @@ void		ft_type_s(t_print *print, void *arg)
 
 void		ft_type_c(t_print *print, void *arg)
 {
-	write(1, (const void *)arg, 1);
+	int		dif;
+	char	c;
+
+	dif = 0;
+	c = (char)arg;
+	if (print->flags->width != 0)
+	{
+		dif = print->flags->width - 1;
+		ft_rep(print, dif, ' ');
+	}
+	write(1, &c, 1);
 	print->len++;
 	print->pos++;
 }
 
-/*void		ft_type_x(print, arg)
+void		ft_type_x(t_print *print, void *arg)
 {
-	char 	*hexbase;
-	char 	*Hexbase;
-	int		n;
+	char	*d;
+	int		i;
 
-	hexbase = "0123456789abcdef";
-	Hexbase = "0123456789abcdef";
+	i = -1;
+	if (print->type == 'x')
+		d = ft_itoa((unsigned int)arg, "0123456789abcdef", 16);
+	else
+		d = ft_itoa((unsigned int)arg, "0123456789ABCDEF", 16);
+	print->pos++;
+	if (print->flags->width != 0 && print->flags->precision == 0)
+		return (ft_width(print, d, i, (print->flags->width - ft_strlen(d))));
+	else if (print->flags->width == 0 && print->flags->precision != 0)
+		return (ft_precision(print, d, i,
+		print->flags->precision - ft_strlen(d)));
+	else if ((print->flags->width != 0) && (print->flags->precision != 0))
+		ft_both(print, d, i);
+	else
+	{
+		while (d[++i])
+			ft_rep(print, 1, d[i]);
+	}
+	free(d);
+}
 
-	while (n > 16)
-	
-}*/

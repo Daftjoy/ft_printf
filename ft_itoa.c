@@ -6,13 +6,13 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:36:12 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/19 17:01:28 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 14:30:12 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned int	ft_count(unsigned int n)
+static unsigned int	ft_count(unsigned int n, int blen)
 {
 	unsigned int i;
 
@@ -22,32 +22,40 @@ static unsigned int	ft_count(unsigned int n)
 	while (n > 0)
 	{
 		i++;
-		n /= 10;
+		n /= blen;
 	}
 	return (i);
 }
 
-static char			*ft_append(char *str, int sign, unsigned int n)
+static char			*ft_append(int sign, unsigned int n, char *base, int blen)
 {
-	unsigned int i;
+	unsigned int	i;
+	char			*str;
 
 	i = 0;
+	if (!(str = (char *)malloc((ft_count(n, blen) + sign + 1) * sizeof(char))))
+		return (0);
+	if (n == 0)
+	{
+		str[0] = '0';
+		str[1] = '\0';
+	}
 	if (sign != 0)
 	{
 		str[i] = '-';
 		i++;
 	}
-	str[ft_count(n) + i] = '\0';
+	str[ft_count(n, blen) + i] = '\0';
 	while (n > 0)
 	{
 		i++;
-		str[ft_count(n) - 1 + sign] = (n % 10) + '0';
-		n /= 10;
+		str[ft_count(n, blen) - 1 + sign] = base[n % blen];
+		n /= blen;
 	}
 	return (str);
 }
 
-char				*ft_itoa(int n)
+char				*ft_itoa(int n, char *base, int blen)//este itoa ahora cambia también la base
 {
 	char			*str;
 	int				sign;
@@ -62,12 +70,5 @@ char				*ft_itoa(int n)
 	}
 	else
 		nb = n;
-	if (!(str = (char *)malloc((ft_count(nb) + sign + 1) * sizeof(char))))
-		return (0);
-	if (n == 0)
-	{
-		str[0] = '0';
-		str[1] = '\0';
-	}
-	return (ft_append(str, sign, nb));
+	return (ft_append(sign, nb, base, blen));
 }

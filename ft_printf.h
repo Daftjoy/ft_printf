@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:24:55 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 00:32:11 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 14:22:04 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void			ft_converse(t_print *print, void *arg);
 void			ft_type_s(t_print *print, void *arg);
 void			ft_type_c(t_print *print, void *arg);
 void			ft_type_d(t_print *print, void *arg);
+void			ft_type_x(t_print *print, void *arg); 
 void			ft_rep(t_print *print, int n, char c);
 void			ft_width(t_print *print, char *d, int i, int dif);
 void			ft_precision(t_print *print, char *d, int i, int dif);
@@ -62,9 +63,10 @@ int				ft_counter(t_print *print);
 void			*ft_ast(t_print *print, void *arg);
 size_t			ft_strlen(const char *s);
 int				ft_isdigit(int c);
+int				ft_putnbr_base(int nbr, int n, const char *base, t_print *print);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_atoi(const char *nptr);
-char			*ft_itoa(int n);
+char			*ft_itoa(int n, char *base, int blen);
 char			*ft_strdup(const char *s1);
 char			*ft_strjoin(char const *s1, char const *s2);
 

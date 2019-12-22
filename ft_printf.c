@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:02:36 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 02:38:04 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 15:30:35 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int		main(void)
 	int a;
 
 	a = 3;
-	printf("%d\n", ft_printf("%.s\n", "hashas"));
-	printf("%d\n", printf("%.s\n", "hashas"));
+	printf("%d\n", ft_printf("%p\n", &a));
+	printf("%d\n", printf("%p\n", &a));
 }
