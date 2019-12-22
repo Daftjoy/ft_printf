@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:24:55 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 02:10:16 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 02:38:38 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,20 @@ void		ft_type_s(t_print *print, void *arg)
 	dif = print->flags->width - ft_strlen(str);
 	if (print->flags->minus == 0)
 		ft_rep(print, dif, ' ');
-	while (str[++i])
-		write(1, &str[i], 1);
+	if (print->flags->dot != 0)
+	{
+		while (str[++i] && (i < print->flags->precision))
+			write(1, &str[i], 1);
+		print->len += print->flags->precision;
+	}
+	else
+	{
+		while (str[++i])
+			write(1, &str[i], 1);
+		print->len += ft_strlen(str);
+	}
 	if (print->flags->minus == 1)
 		ft_rep(print, dif, ' ');
-	print->len += ft_strlen(str);
 	print->pos++;
 }
 
