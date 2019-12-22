@@ -6,11 +6,11 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:36:12 by antmarti          #+#    #+#             */
-/*   Updated: 2019/11/27 12:11:45 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/19 17:01:28 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static unsigned int	ft_count(unsigned int n)
 {

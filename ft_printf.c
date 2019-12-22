@@ -6,7 +6,7 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:02:36 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/18 21:30:46 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/22 01:00:34 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ int		ft_printf(const char *format, ...)
 		ft_init(print, format);
 		while (print->format[print->pos])
 		{
-			if (print->format[print->pos] == '%' && print->pos++)
+			if (print->format[print->pos] == '%')
 			{
+				print->pos++;
 				ft_flags(print);
-				printf("%d\n", (int)print->flags->);
 				arg = va_arg(print->list, void *);
-				if (print->flags->ast == 1)
-				{
-					ft_ast(print, arg);
-					arg = va_arg(print->list, void *);
-				}
-				//ft_converse(print, arg);
+				if (print->flags->ast != 0)
+					arg = ft_ast(print, arg);
+				ft_converse(print, arg);
 			}
-			write(1, &((const void *)print->format)[print->pos], 1);
-			print->len++;
-			print->pos++;
+			else
+			{
+				write(1, &((const void *)print->format)[print->pos], 1);
+				print->len++;
+				print->pos++;
+			}
 		}
 	}
 	return (print->len);
@@ -47,5 +47,6 @@ int		ft_printf(const char *format, ...)
 
 int		main(void)
 {
-	ft_printf("axjaa   %012412421.*d",43,  23);
+	ft_printf("%16.*d\n", 32, 16);
+	printf("%16.*d\n", 32, 16);
 }

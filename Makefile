@@ -1,4 +1,4 @@
-SRCS	=	ft_printf.c
+SRCS	=	ft_printf.c ft_atoi.c ft_isdigit.c ft_itoa.c ft_strlen.c ft_type_d.c ft_utils.c
 
 OBJS	=	${SRCS:.c=.o}
 

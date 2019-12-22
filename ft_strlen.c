@@ -6,11 +6,11 @@
 /*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 17:20:52 by antmarti          #+#    #+#             */
-/*   Updated: 2019/11/27 16:02:45 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/19 12:06:53 by antmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 size_t	ft_strlen(const char *s)
 {
