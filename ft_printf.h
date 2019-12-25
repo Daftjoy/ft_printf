@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaresp <amaresp@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:24:55 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 14:22:04 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/25 00:22:37 by amaresp          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ int				ft_counter(t_print *print);
 void			*ft_ast(t_print *print, void *arg);
 size_t			ft_strlen(const char *s);
 int				ft_isdigit(int c);
+void			ft_type_p(t_print *print, void *arg);
 int				ft_putnbr_base(int nbr, int n, const char *base, t_print *print);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_atoi(const char *nptr);
-char			*ft_itoa(int n, char *base, int blen);
+char			*ft_itoa(long long int n, char *base, int blen);
 char			*ft_strdup(const char *s1);
 char			*ft_strjoin(char const *s1, char const *s2);
 

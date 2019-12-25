@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaresp <amaresp@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:36:12 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 14:30:12 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/24 19:18:20 by amaresp          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned int	ft_count(unsigned int n, int blen)
+static unsigned int	ft_count(unsigned long long int n, int blen)
 {
 	unsigned int i;
 
@@ -27,7 +27,7 @@ static unsigned int	ft_count(unsigned int n, int blen)
 	return (i);
 }
 
-static char			*ft_append(int sign, unsigned int n, char *base, int blen)
+static char			*ft_append(int sign, unsigned long long int n, char *base, int blen)
 {
 	unsigned int	i;
 	char			*str;
@@ -55,11 +55,11 @@ static char			*ft_append(int sign, unsigned int n, char *base, int blen)
 	return (str);
 }
 
-char				*ft_itoa(int n, char *base, int blen)//este itoa ahora cambia también la base
+char				*ft_itoa(long long int n, char *base, int blen)//este itoa ahora cambia también la base
 {
-	char			*str;
-	int				sign;
-	unsigned int	nb;
+	char				*str;
+	int					sign;
+	unsigned long long int	nb;
 
 	sign = 0;
 	str = 0;

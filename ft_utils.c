@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaresp <amaresp@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:24:55 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 15:33:11 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/25 20:40:14 by amaresp          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,31 @@ void		ft_converse(t_print *print, void *arg)
 {
 	if (print->format[print->pos] == 'c')
 		ft_type_c(print, arg);
-	if (print->format[print->pos] == 's')
+	else if (print->format[print->pos] == 's')
 		ft_type_s(print, arg);
-	if (print->format[print->pos] == 'd' || (print->format[print->pos] == 'i'))
+	else if (print->format[print->pos] == 'd' || (print->format[print->pos] == 'i'))
 		ft_type_d(print, arg);
-	if (print->format[print->pos] == 'u')
+	else if (print->format[print->pos] == 'u')
 	{
 		print->type = 'u';
 		ft_type_d(print, arg);
 	}
-	if (print->format[print->pos] == 'x' ||
-	(print->format[print->pos] == 'X') ||
-	(print->format[print->pos] == 'p'))
+	else if (print->format[print->pos] == 'p')
 	{
-		if (print->format[print->pos] == 'x' ||
-		(print->format[print->pos] == 'p'))//no funciona todavía
+			print->type = 'p';
+			ft_type_p(print, arg);
+	}
+	else if (print->format[print->pos] == 'x')
+	{
 			print->type = 'x';
-		else
-			print->type = 'X';
+			ft_type_x(print, arg);
+	}
+	else
+	{
+		print->type = 'X';
 		ft_type_x(print, arg);
 	}
+	return ;
 }
 
 void		ft_type_s(t_print *print, void *arg)
@@ -162,9 +167,9 @@ void		ft_type_x(t_print *print, void *arg)
 
 	i = -1;
 	if (print->type == 'x')
-		d = ft_itoa((unsigned int)arg, "0123456789abcdef", 16);
+		d = ft_itoa((long long int)arg, "0123456789abcdef", 16);
 	else
-		d = ft_itoa((unsigned int)arg, "0123456789ABCDEF", 16);
+		d = ft_itoa((long long int)arg, "0123456789ABCDEF", 16);
 	print->pos++;
 	if (print->flags->width != 0 && print->flags->precision == 0)
 		return (ft_width(print, d, i, (print->flags->width - ft_strlen(d))));
@@ -180,4 +185,30 @@ void		ft_type_x(t_print *print, void *arg)
 	}
 	free(d);
 }
+
+void		ft_type_p(t_print *print, void *arg)
+{
+	char	*d;
+	int		i;
+
+	i = -1;
+	d = ft_itoa((long long int)arg, "0123456789abcdef", 16);
+	print->pos++;
+	if (print->flags->width != 0 && print->flags->precision == 0)
+		return (ft_width(print, d, i, (print->flags->width - ft_strlen(d) - 2)));
+	else if (print->flags->width == 0 && print->flags->precision != 0)
+		return (ft_precision(print, d, i,
+		print->flags->precision - ft_strlen(d)));
+	else if ((print->flags->width != 0) && (print->flags->precision != 0))
+		ft_both(print, d, i);
+	else
+	{
+		ft_rep(print, 1, '0');
+		ft_rep(print, 1, 'x');
+		while (d[++i])
+			ft_rep(print, 1, d[i]);
+	}
+	free(d);
+}
+
 

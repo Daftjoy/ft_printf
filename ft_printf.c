@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antmarti <antmarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaresp <amaresp@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:02:36 by antmarti          #+#    #+#             */
-/*   Updated: 2019/12/22 15:30:35 by antmarti         ###   ########.fr       */
+/*   Updated: 2019/12/25 20:43:02 by amaresp          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int		ft_printf(const char *format, ...)
 
 int		main(void)
 {
-	int a;
+	//int a = 3;
+	char b = 'a';
 
-	a = 3;
-	printf("%d\n", ft_printf("%p\n", &a));
-	printf("%d\n", printf("%p\n", &a));
+	printf("%d\n", ft_printf("%.16p hh %s\n", &b, "hola"));
+	printf("%d\n", printf("%.16p hh %s\n", &b, "hola"));
 }
