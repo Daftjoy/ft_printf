@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_type_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agianico <agianico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 12:20:23 by agianico          #+#    #+#             */
-/*   Updated: 2019/12/23 14:06:23 by agianico         ###   ########.fr       */
+/*   Created: 2020/01/07 15:29:36 by agianico          #+#    #+#             */
+/*   Updated: 2020/01/09 12:13:16 by agianico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_isdigit(int c)
+void		ft_type_c(t_print *print, void *arg)
 {
-	if (c < 060 || c > 071)
-		return (0);
-	return (1);
+	int		dif;
+	char	c;
+
+	dif = 0;
+	c = (char)arg;
+	if (print->flags->minus == 1)
+	{
+		write(1, &c, 1);
+		dif = print->flags->width - 1;
+		ft_rep(print, dif, ' ');
+	}
+	else if (print->flags->width != 0)
+	{
+		dif = print->flags->width - 1;
+		ft_rep(print, dif, ' ');
+		write(1, &c, 1);
+	}
+	else
+		write(1, &c, 1);
+	print->len++;
+	print->pos++;
 }
